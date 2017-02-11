@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== MediaPress Set Profile Cover ===
 Contributors: buddydev, raviousprime
 Tags: mediapress, buddypress
 Requires at least: 4.0
