@@ -5,6 +5,11 @@
  * @package mpp-set-profile-cover
  */
 
+// Exit if file access directly over web.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Set profile cover
  */
@@ -30,7 +35,7 @@ function mpp_spc_set_profile_cover() {
 		return;
 	}
 
-	$media = mpp_get_media( absint( $_GET['media-id'] ) );
+	$media = mpp_get_media( $media_id );
 
 	if ( is_null( $media ) || $media->type !== 'photo' || $media->user_id != bp_loggedin_user_id() ) {
 		bp_core_add_message( __( 'You can only use your own photo.', 'mpp-set-profile-cover' ), 'error' );
@@ -68,9 +73,10 @@ function mpp_spc_set_profile_cover() {
 	if ( ! $cover ) {
 		bp_core_add_message( __( 'Unable to set as cover.', 'mpp-set-profile-cover' ), 'error' );
 		return;
+	} else {
+		bp_core_add_message( __( 'Cover image is added successfully.', 'mpp-set-profile-cover' ), 'success' );
 	}
-
-	bp_core_add_message( __( 'Cover image is added successfully.', 'mpp-set-profile-cover' ) );
 }
 
 add_action( 'bp_screens', 'mpp_spc_set_profile_cover', 200 );
+
