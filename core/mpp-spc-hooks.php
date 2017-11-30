@@ -10,18 +10,30 @@
  */
 function mpp_spc_set_profile_cover() {
 
-	$isset = false;
-	if ( isset( $_GET['nonce'] ) && isset( $_GET['media-id'] ) ) {
-		$isset = true;
+	if ( ! isset ( $_GET['mpp-action'] ) || $_GET['mpp-action'] !== 'set-profile-cover' ) {
+		return ;
 	}
 
-	if ( ! $isset || ! bp_is_user_change_cover_image() || ! wp_verify_nonce( $_GET['nonce'], 'mpp-set-profile-cover' ) ) {
+	// our action is set, make sure we are on the change cover page.
+	if ( ! bp_is_user_change_cover_image() ) {
 		return;
 	}
 
-	$media      = mpp_get_media( absint( $_GET['media-id'] ) );
+	// verify request.
+	if ( ! isset( $_GET['mpp-nonce'] ) || ! wp_verify_nonce( $_GET['mpp-nonce'], 'mpp-set-profile-cover' ) ) {
+		return;
+	}
 
-	if ( is_null( $media ) || $media->user_id != bp_loggedin_user_id() ) {
+	$media_id = isset( $_GET['mpp-media-id'] ) ? absint( $_GET['mpp-media-id'] ) : 0;
+
+	if ( ! $media_id ) {
+		return;
+	}
+
+	$media = mpp_get_media( absint( $_GET['media-id'] ) );
+
+	if ( is_null( $media ) || $media->type !== 'photo' || $media->user_id != bp_loggedin_user_id() ) {
+		bp_core_add_message( __( 'You can only use your own photo.', 'mpp-set-profile-cover' ), 'error' );
 		return;
 	}
 
@@ -54,7 +66,7 @@ function mpp_spc_set_profile_cover() {
 	), $cover_image_attachment );
 
 	if ( ! $cover ) {
-		bp_core_add_message( __( 'Unable to set as cover', 'mpp-set-profile-cover' ) );
+		bp_core_add_message( __( 'Unable to set as cover.', 'mpp-set-profile-cover' ), 'error' );
 		return;
 	}
 

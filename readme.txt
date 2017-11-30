@@ -2,14 +2,13 @@
 Contributors: buddydev, raviousprime
 Tags: mediapress, buddypress
 Requires at least: 4.0
-Tested up to: 4.6
+Tested up to: 4.9
 Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
-
-An add-on for MediaPress. Allow users to set MediaPress Photo as BuddyPress profile cover photo.
+Use your MediaPress uploaded photo as your BuddyPress Profile Cover.
 
 == Installation ==
 
@@ -36,10 +35,10 @@ We request you to use [BuddyDev Forums](https://buddydev.com/support/forums/) fo
 == Changelog ==
 
 = 1.0.1 =
- * Only load if buddypress is active and not disabled user cover option
- * Bug fixes while setting profile pic cover
+ * Only load if BuddyPress is active and not disabled user cover option
+ * Bug fixes for setting profile pic cover.
 
 = 1.0.0 =
- * Initial Release on wp.org repo.
+ * Initial release.
 
 

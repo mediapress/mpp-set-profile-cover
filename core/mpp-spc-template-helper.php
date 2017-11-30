@@ -23,7 +23,7 @@ class MPP_SPC_Template_Helper {
 	}
 
 	/**
-	 * Setup callabck to MediaPress actions
+	 * Setup callback to MediaPress actions.
 	 */
 	private function setup() {
 		add_action( 'mpp_media_meta', array( $this, 'add_link' ) );
@@ -62,7 +62,7 @@ class MPP_SPC_Template_Helper {
 		}
 
 		$css_class = 'mpp-set-profile-cover ' . $css_class;
-		$url       = $this->get_query_string( $media_id );
+		$url       = $this->get_url( $media_id );
 		$link      = sprintf( '<a href="%s" class="%s" title="%s">%s</a>', $url, $css_class, $label, $label );
 
 		return $link;
@@ -75,12 +75,13 @@ class MPP_SPC_Template_Helper {
 	 *
 	 * @return string
 	 */
-	public function get_query_string( $media_id ) {
+	public function get_url( $media_id ) {
 
 		$url = trailingslashit( bp_loggedin_user_domain() . bp_get_profile_slug() ) . 'change-cover-image/';
 		$url = add_query_arg( array(
-			'media-id' => $media_id,
-			'nonce'    => wp_create_nonce( 'mpp-set-profile-cover' ),
+			'mpp-media-id'   => $media_id,
+			'mpp-action' => 'set-profile-cover',
+			'mpp-nonce'  => wp_create_nonce( 'mpp-set-profile-cover' ),
 		), $url );
 
 		return $url;
