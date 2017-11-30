@@ -3,7 +3,7 @@ Contributors: buddydev, raviousprime
 Tags: mediapress, buddypress
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,9 @@ We request you to use [BuddyDev Forums](https://buddydev.com/support/forums/) fo
 3. Redirect to change cover page with photo as cover picture
 
 == Changelog ==
+
+= 1.0.2 =
+ * Minor fixes
 
 = 1.0.1 =
  * Only load if BuddyPress is active and not disabled user cover option
