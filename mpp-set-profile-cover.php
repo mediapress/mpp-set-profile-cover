@@ -1,4 +1,9 @@
 <?php
+/**
+ * Main plugin loader file
+ *
+ * @package mpp-set-profile-cover
+ */
 
 /**
  * Plugin Name: MediaPress Set Profile Cover
@@ -9,7 +14,10 @@
  * Description: This plugin is an addon for MediaPress and allow user to set their photo as profile cover
  *
  * License: GPL2 or Above
- *
+ */
+
+/**
+ * Class MPP_Set_Profile_Cover_Helper
  */
 class MPP_Set_Profile_Cover_Helper {
 	/**
@@ -20,13 +28,16 @@ class MPP_Set_Profile_Cover_Helper {
 	private static $instance = null;
 
 	/**
-	 * @var string plugin directory path
+	 * Plugin directory path
+	 *
+	 * @var string
 	 */
 	private $path;
 
-
+	/**
+	 * The constructor.
+	 */
 	private function __construct() {
-
 		$this->setup();
 	}
 
@@ -42,7 +53,6 @@ class MPP_Set_Profile_Cover_Helper {
 		}
 
 		return self::$instance;
-
 	}
 
 	/**
@@ -50,10 +60,8 @@ class MPP_Set_Profile_Cover_Helper {
 	 */
 	private function setup() {
 
-		//setup plugin path
 		$this->path = plugin_dir_path( __FILE__ );
 
-		//load files when MediaPress is loaded
 		add_action( 'mpp_loaded', array( $this, 'load' ) );
 		add_action( 'mpp_init', array( $this, 'load_textdomain' ) );
 	}
@@ -63,7 +71,10 @@ class MPP_Set_Profile_Cover_Helper {
 	 */
 	public function load() {
 
-		//$files array is an array of file paths(relative to this plugin's directory) to the files we want to include
+		if ( ! function_exists( 'buddypress' ) || (bool) bp_get_option( 'bp-disable-cover-image-uploads' ) ) {
+			return;
+		}
+
 		$files = array(
 			'core/mpp-spc-functions.php',
 			'core/mpp-spc-template-helper.php',
@@ -73,19 +84,15 @@ class MPP_Set_Profile_Cover_Helper {
 		foreach ( $files as $file ) {
 			require_once $this->path . $file;
 		}
-
 	}
 
 	/**
 	 * Load plugin translations
 	 */
 	public function load_textdomain() {
-		//Note: Developers, if possible, please use the plugin directory name as textdomain
 		load_plugin_textdomain( 'mpp-set-profile-cover', false, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
-
-
 }
 
-//initialize
 MPP_Set_Profile_Cover_Helper::get_instance();
+
