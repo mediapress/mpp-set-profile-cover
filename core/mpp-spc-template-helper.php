@@ -79,8 +79,8 @@ class MPP_SPC_Template_Helper {
 
 		$url = trailingslashit( bp_loggedin_user_domain() . bp_get_profile_slug() ) . 'change-cover-image/';
 		$url = add_query_arg( array(
-			'mpp-set-profile-cover' => 1,
-			'media-id'              => $media_id,
+			'media-id' => $media_id,
+			'nonce'    => wp_create_nonce( 'mpp-set-profile-cover' ),
 		), $url );
 
 		return $url;

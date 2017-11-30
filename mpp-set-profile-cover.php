@@ -76,7 +76,6 @@ class MPP_Set_Profile_Cover_Helper {
 		}
 
 		$files = array(
-			'core/mpp-spc-functions.php',
 			'core/mpp-spc-template-helper.php',
 			'core/mpp-spc-hooks.php',
 		);
