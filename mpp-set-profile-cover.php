@@ -1,14 +1,8 @@
 <?php
 /**
- * Main plugin loader file
- *
- * @package mpp-set-profile-cover
- */
-
-/**
  * Plugin Name: MediaPress Set Profile Cover
  * Plugin URI: https://buddydev.com/plugins/mediapress-set-profile-cover/
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: BuddyDev Team
  * Author URI: https://buddydev.com
  * Description: This plugin is an addon for MediaPress that allow user to set their photo as profile cover.
