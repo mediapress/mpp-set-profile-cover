@@ -7,44 +7,52 @@
 
 /**
  * Plugin Name: MediaPress Set Profile Cover
- * Plugin URI: https://buddydev.com/plugins/mpp-set-profile-cover/
+ * Plugin URI: https://buddydev.com/plugins/mediapress-set-profile-cover/
  * Version: 1.0.2
  * Author: BuddyDev Team
  * Author URI: https://buddydev.com
- * Description: This plugin is an addon for MediaPress and allow user to set their photo as profile cover
+ * Description: This plugin is an addon for MediaPress that allow user to set their photo as profile cover.
  *
  * License: GPL2 or Above
  */
 
+// no direct access.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
- * Class MPP_Set_Profile_Cover_Helper
+ * Class MPP_Set_Profile_Cover
  */
-class MPP_Set_Profile_Cover_Helper {
+class MPP_Set_Profile_Cover {
+
 	/**
-	 * Singleton Instance
+	 * Class Instance
 	 *
-	 * @var MPP_Set_Profile_Cover_Helper
+	 * @var MPP_Set_Profile_Cover
 	 */
 	private static $instance = null;
 
 	/**
-	 * Plugin directory path
+	 * Plugin absolute directory path
 	 *
 	 * @var string
 	 */
 	private $path;
 
 	/**
-	 * The constructor.
+	 * MPP_Set_Profile_Cover constructor.
 	 */
 	private function __construct() {
+		$this->path = plugin_dir_path( __FILE__ );
+
 		$this->setup();
 	}
 
 	/**
 	 * Get the singleton instance
 	 *
-	 * @return MPP_Set_Profile_Cover_Helper
+	 * @return MPP_Set_Profile_Cover
 	 */
 	public static function get_instance() {
 
@@ -59,9 +67,6 @@ class MPP_Set_Profile_Cover_Helper {
 	 * Setup hooks
 	 */
 	private function setup() {
-
-		$this->path = plugin_dir_path( __FILE__ );
-
 		add_action( 'mpp_loaded', array( $this, 'load' ) );
 		add_action( 'mpp_init', array( $this, 'load_textdomain' ) );
 	}
@@ -93,5 +98,5 @@ class MPP_Set_Profile_Cover_Helper {
 	}
 }
 
-MPP_Set_Profile_Cover_Helper::get_instance();
+MPP_Set_Profile_Cover::get_instance();
 
